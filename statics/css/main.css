@@ -1,55 +1,55 @@
-html{
-    height: 100%;
+html {
+  height: 100%;
 }
 
-body{
-    /* background: linear-gradient(rgba(247, 198, 134, 0.2), rgba(247, 198, 134, 0.2)), url(../library.jpg); */
-    background-size: cover;
-    background-position: center;
-    font-family: 'Raleway', sans-serif;
-    color: black;
+body {
+  /* background: linear-gradient(rgba(247, 198, 134, 0.2), rgba(247, 198, 134, 0.2)), url(../library.jpg); */
+  background-size: cover;
+  background-position: center;
+  font-family: "Raleway", sans-serif;
+  color: black;
 }
 
-.navbar{
-    background-color: rgb(203, 240, 221);
+.navbar {
+  background-color: rgb(203, 240, 221);
 }
 
-.col-lg-12{
-    text-align: center;
-    padding-top: 25%;
-    text-shadow: 0px 4px 3px black;
+.col-lg-12 {
+  text-align: center;
+  padding-top: 25%;
+  text-shadow: 0px 4px 3px black;
 }
 h1 {
-    font-weight: 700;
-    font-size: 5em;
+  font-weight: 700;
+  font-size: 5em;
 }
-hr{
-    background-color: white;
-    width: 400px;
-}
-
-.position{
-    margin-top: 7%;
+hr {
+  background-color: white;
+  width: 400px;
 }
 
-.jumbotron{
-    background: url(../wood.jpg);
-    background-size: cover;
+.position {
+  margin-top: 7%;
 }
 
-.card-img-top{
-    height: 17vw;
+.jumbotron {
+  background: url(../wood.jpg);
+  background-size: cover;
 }
 
-.cartimg{
-    max-height: 9vw ;   
+.card-img-top {
+  height: 17vw;
 }
 
-.footer_link{
-    color:rgb(167, 243, 224);
+.cartimg {
+  max-height: 9vw;
 }
 
-.footer_link:hover{
-    color:rgb(98, 182, 164);
-    text-decoration: none;       /*  沒有底線 */
+.footer_link {
+  color: rgb(167, 243, 224);
+}
+
+.footer_link:hover {
+  color: rgb(98, 182, 164);
+  text-decoration: none; /*  沒有底線 */
 }
