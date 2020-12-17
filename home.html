@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>木木馬華圖書館</title>
-		<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
-		<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+		<meta charset="utf-8">
+		
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 			  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 		<link rel="stylesheet" href="./statics/css/main.css">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 		<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Raleway:wght@600&display=swap" rel="stylesheet">
-		<script src="statics/js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+		<script
+		src="https://code.jquery.com/jquery-3.5.1.min.js"
+		integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+		crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		
+		<title>木木馬華圖書館</title>
 	</head>
 	<body>
 		<!-- 上面資訊排 -->
@@ -22,19 +27,19 @@
 			
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav mr-auto">
-						<li class="nav-item active">
-							<a class="nav-link" href="#">Home</a>
-						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">About</a>
-						</li>
+	                        <a class="nav-link" href="./home.html">Home</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a class="nav-link" href="./cart.html">Cart</a>
+	                    </li>
 						<li class="nav-item">
 							<a class="nav-link" href="#">Contact</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-address-card"></i> sign up</a></li>
-						<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-address-book"></i> login</a></li>
+						<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>
+                    	<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>
 					</ul>
 				</div>
 			</div>
@@ -57,7 +62,7 @@
 	<div class="row">
 		<div class="col-lg-3 col-sm-6 mb-5">
 			<div class="card">
-				<img src="statics/img/book/c.jpg" class="card-img-top">
+				<img src="./statics/img/book/c.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">C語言教學手冊</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -67,7 +72,7 @@
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
 			<div class="card">
-				<img src="statics/img/book/go.jpg" class="card-img-top">
+				<img src="./statics/img/book/go.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">The Way To GO</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -77,7 +82,7 @@
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
 			<div class="card">
-				<img src="statics/img/book/java.jpg" class="card-img-top">
+				<img src="./statics/img/book/java.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">Java教科書</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -87,7 +92,7 @@
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
 			<div class="card">
-				<img src="statics/img/book/python.jpg" class="card-img-top">
+				<img src="./statics/img/book/python.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">python教科書</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -99,7 +104,7 @@
 </div>
 
 <!-- 顯示頁數 -->
-<nav aria-label="Page navigation" style="padding: 1%;">
+<nav aria-label="Page navigation">
 		<ul class="pagination justify-content-center">
 			<li class="page-item disabled"><a class="page-link">First</a></li>
 			<li class="active"><a class="page-link"> 1 </a></li>			<!-- 如果在此頁面則不可點 -->
@@ -111,6 +116,40 @@
 </nav>
 
 <!-- footer -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<footer class="pt-5 pb-2 footer">
+	<div class="row" style="max-width: 100%; padding-left: 5%;">
+	  	<div class="col-lg-2">
+			<h5 style="color:white;">Features</h5>
+			<ul class="list-unstyled text-small">
+		  		<li><a class="footer_link" href="#">Cool stuff</a></li>
+		  		<li><a class="footer_link" href="#">Random feature</a></li>
+		  		<li><a class="footer_link" href="#">Team feature</a></li>
+		  		<li><a class="footer_link" href="#">Stuff for developers</a></li>
+				<li><a class="footer_link" href="#">Another one</a></li>
+			</ul>
+	  	</div>
+	  	<div class="col-lg-2">
+			<h5 style="color:white;">Resources</h5>
+			<ul class="list-unstyled text-small">
+		  		<li><a class="footer_link" href="#">Resource name</a></li>
+		  		<li><a class="footer_link" href="#">Resource</a></li>
+		  		<li><a class="footer_link" href="#">Another resource</a></li>
+		  		<li><a class="footer_link" href="#">Final resource</a></li>
+			</ul>
+	  	</div>
+	  	<div class="col-lg-2">
+			<h5 style="color:white;">Resources</h5>
+			<ul class="list-unstyled text-small">
+		 		<li><a class="footer_link" href="#">Business</a></li>
+		  		<li><a class="footer_link" href="#">Education</a></li>
+		  		<li><a class="footer_link" href="#">Government</a></li>
+		  		<li><a class="footer_link" href="#">Gaming</a></li>
+			</ul>
+	  	</div>
+	  	<div class="col-lg-5 mr-2">
+			<img class="float-right" src="./statics/img/book/bloodtrailer.png" width="30%">
+		</div>
+	</div>
+  </footer>
 </body>
 </html>

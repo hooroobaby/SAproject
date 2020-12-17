@@ -2,6 +2,7 @@ package ncu.im3069.demo.controller;
 
 import java.io.*;
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import org.json.*;
 import ncu.im3069.demo.app.Member;
@@ -20,6 +21,7 @@ import ncu.im3069.tools.JsonReader;
  * @since 1.0.0
  */
 
+@WebServlet("/api/member.do")
 public class MemberController extends HttpServlet {
     
     /** The Constant serialVersionUID. */
