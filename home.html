@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		
+		<link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+    	<link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
 			  integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 		<link rel="stylesheet" href="./statics/css/main.css">
@@ -17,33 +19,83 @@
 		<title>木木馬華圖書館</title>
 	</head>
 	<body>
+		<!-- navbar驗證登入 -->
+		<script type="text/javascript">
+                $(document).ready(function() {
+                	checklogin();
+                	
+                    function checklogin() {
+                        var email = $.cookie('email');
+                        var navbar_left = '';
+                        var navbar_right = '';
+                        
+                        if(email === undefined){
+                        	// 將資料組成JSON格式
+                            email = "";	
+                        }
+                        var data_object = {
+                        	"email": email
+                        };
+
+                        // 將JSON格式轉換成字串
+                        var data_string = JSON.stringify(data_object);
+
+                        // 發出POST的AJAX請求
+                        $.ajax({
+                                type: "POST",
+                                url: "api/checklogin.do",
+                                data: data_string,
+                                crossDomain: true,
+                                cache: false,
+                                dataType: 'json',
+                                timeout: 5000,
+                                success: function (response) {
+                                	if(response.status == 400){
+                                    	navbar_right += '<ul class="navbar-nav">';
+                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
+                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
+                                    	navbar_right += '</ul>';
+                                    }else if(response.status == 200){
+                                    	navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
+                                    	navbar_right += '<ul class="navbar-nav">';
+                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
+                                    	navbar_right += '<i class="fas fa-address-book"></i> '+ response.response.name +'</a></li>';
+                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
+                                    	navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li></ul>';
+                                    }
+                                	
+                                	$("#navbar_left").append(navbar_left);
+                                	$("#navbar_right").append(navbar_right);
+                                },
+                                error: function () {
+                                    alert("無法連線到伺服器！");
+                                }
+                        });
+                    }
+                });
+            </script>
 		<!-- 上面資訊排 -->
 		<nav class="navbar navbar-expand-md navbar-light">
-			<div class="container">
-				<a href="#" class="navbar-brand"><i class="fas fa-cat"></i> 木木馬華圖書館</a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-				</button>
-			
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item">
+	        <div class="container">
+	            <a href="#" class="navbar-brand"><i class="fas fa-cat"></i> 木木馬華圖書館</a>
+	            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	            <span class="navbar-toggler-icon"></span>
+	            </button>
+	        
+	            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	                <ul class="navbar-nav mr-auto">
+	                    <li class="nav-item">
 	                        <a class="nav-link" href="./home.html">Home</a>
 	                    </li>
+	                    <div id="navbar_left"></div>
 	                    <li class="nav-item">
-	                        <a class="nav-link" href="./cart.html">Cart</a>
+	                        <a class="nav-link" href="#">Contact</a>
 	                    </li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Contact</a>
-						</li>
-					</ul>
-					<ul class="navbar-nav">
-						<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>
-                    	<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
+	                </ul>
+		            <div id="navbar_right"></div>
+	            </div>
+	        </div>
+    	</nav>
 
 <!-- header -->
 
@@ -116,40 +168,5 @@
 </nav>
 
 <!-- footer -->
-<footer class="pt-5 pb-2 footer">
-	<div class="row" style="max-width: 100%; padding-left: 5%;">
-	  	<div class="col-lg-2">
-			<h5 style="color:white;">Features</h5>
-			<ul class="list-unstyled text-small">
-		  		<li><a class="footer_link" href="#">Cool stuff</a></li>
-		  		<li><a class="footer_link" href="#">Random feature</a></li>
-		  		<li><a class="footer_link" href="#">Team feature</a></li>
-		  		<li><a class="footer_link" href="#">Stuff for developers</a></li>
-				<li><a class="footer_link" href="#">Another one</a></li>
-			</ul>
-	  	</div>
-	  	<div class="col-lg-2">
-			<h5 style="color:white;">Resources</h5>
-			<ul class="list-unstyled text-small">
-		  		<li><a class="footer_link" href="#">Resource name</a></li>
-		  		<li><a class="footer_link" href="#">Resource</a></li>
-		  		<li><a class="footer_link" href="#">Another resource</a></li>
-		  		<li><a class="footer_link" href="#">Final resource</a></li>
-			</ul>
-	  	</div>
-	  	<div class="col-lg-2">
-			<h5 style="color:white;">Resources</h5>
-			<ul class="list-unstyled text-small">
-		 		<li><a class="footer_link" href="#">Business</a></li>
-		  		<li><a class="footer_link" href="#">Education</a></li>
-		  		<li><a class="footer_link" href="#">Government</a></li>
-		  		<li><a class="footer_link" href="#">Gaming</a></li>
-			</ul>
-	  	</div>
-	  	<div class="col-lg-5 mr-2">
-			<img class="float-right" src="./statics/img/book/bloodtrailer.png" width="30%">
-		</div>
-	</div>
-  </footer>
-</body>
-</html>
+<div id="footer_partials"></div>
+<script>$('#footer_partials').load('partials/footer.html')</script>

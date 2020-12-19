@@ -48,12 +48,14 @@ public class LoginController extends HttpServlet {
             JSONObject m = data.getJSONObject(0);
         	if(m.getString("password").equals(password)) {
         		JSONObject resp = new JSONObject();
-                resp.put("status", "200");
-                resp.put("message", "所有會員資料取得成功");
-//                resp.put("response", query);
                 Cookie login_email = new Cookie("email", email);
                 login_email.setMaxAge(7 * 24 * 60 * 60); // 一星期內有效
+                login_email.setPath("/");
                 response.addCookie(login_email);
+                
+                resp.put("status", "200");
+                resp.put("message", "登入成功");
+                resp.put("response", query);
                 
                 jsr.response(resp, response);
         	}else {
