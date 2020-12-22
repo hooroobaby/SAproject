@@ -27,7 +27,7 @@ public class OrderHelper {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         long id = -1;
-        JSONArray opa = new JSONArray();
+//        JSONArray opa = new JSONArray();
         
         try {
             /** 取得資料庫之連線 */

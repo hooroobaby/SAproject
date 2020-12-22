@@ -63,7 +63,7 @@ public class ProductHelper {
                 String name = rs.getString("name");
                 boolean rented = rs.getBoolean("rented");
                 String image = rs.getString("image");
-                String describe = rs.getString("describe");
+                String describe = rs.getString("description");
                 int receiptID = rs.getInt("receiptID");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
@@ -145,7 +145,7 @@ public class ProductHelper {
               String name = rs.getString("name");
               boolean rented = rs.getBoolean("rented");
               String image = rs.getString("image");
-              String describe = rs.getString("describe");
+              String describe = rs.getString("description");
               int receiptID = rs.getInt("receiptID");
               
               /** 將每一筆商品資料產生一名新Product物件 */
@@ -211,7 +211,7 @@ public class ProductHelper {
                 String name = rs.getString("name");
                 boolean rented = rs.getBoolean("rented");
                 String image = rs.getString("image");
-                String describe = rs.getString("describe");
+                String describe = rs.getString("description");
                 int receiptID = rs.getInt("receiptID");
                 
                 /** 將每一筆商品資料產生一名新Product物件 */
@@ -264,7 +264,7 @@ public class ProductHelper {
                 String name = rs.getString("name");
                 boolean rented = rs.getBoolean("rented");
                 String image = rs.getString("image");
-                String describe = rs.getString("describe");
+                String describe = rs.getString("description");
                 int receiptID = rs.getInt("receiptID");
                 
                 /** 將每一筆會員資料產生一名新Member物件 */
