@@ -6,12 +6,15 @@ public class Product {
 
     /** id，會員編號 */
     private int id;
+    
+    /** receiptID，訂單編號 */
+    private int receiptID;
 
     /** id，會員編號 */
     private String name;
 
     /** id，會員編號 */
-    private double price;
+    private boolean rented;
 
     /** id，會員編號 */
     private String image;
@@ -37,10 +40,11 @@ public class Product {
      * @param price 產品價格
      * @param image 產品圖片
      */
-	public Product(String name, double price, String image) {
+	public Product(String name,  boolean rented, String image, String describe) {
 		this.name = name;
-		this.price = price;
+		this.rented = rented;
 		this.image = image;
+		this.describe = describe;
 	}
 
     /**
@@ -53,12 +57,13 @@ public class Product {
      * @param image 產品圖片
      * @param describe 產品敘述
      */
-	public Product(int id, String name, double price, String image, String describe) {
+	public Product(int id, String name, boolean rented, String image, String describe, int receiptID) {
 		this.id = id;
 		this.name = name;
-		this.price = price;
+		this.rented = rented;
 		this.image = image;
 		this.describe = describe;
+		this.receiptID = receiptID;
 	}
 
     /**
@@ -84,8 +89,8 @@ public class Product {
      *
      * @return double 回傳產品價格
      */
-	public double getPrice() {
-		return this.price;
+	public boolean isRented() {
+		return this.rented;
 	}
 
     /**
@@ -105,7 +110,19 @@ public class Product {
 	public String getDescribe() {
 		return this.describe;
 	}
+	
+	public int getReceiptID() {
+		return this.receiptID;
+	}
 
+	public void setReceiptID(int receiptID) {
+		this.receiptID = receiptID;
+	}
+	
+	public void setIsRented(boolean b) {
+		this.rented = b;
+	}
+	
     /**
      * 取得產品資訊
      *
@@ -116,9 +133,10 @@ public class Product {
         JSONObject jso = new JSONObject();
         jso.put("id", getID());
         jso.put("name", getName());
-        jso.put("price", getPrice());
+        jso.put("rented", isRented());
         jso.put("image", getImage());
         jso.put("describe", getDescribe());
+        jso.put("receiptID", getReceiptID());
 
         return jso;
     }
