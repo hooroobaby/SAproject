@@ -15,23 +15,12 @@ import ncu.im3069.tools.JsonReader;
 /**
  * Servlet implementation class LoginController
  */
-@WebServlet("/api/login.do")
+//@WebServlet("/api/login.do")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	private MemberHelper mh =  MemberHelper.getHelper();
 
-//	/**
-//	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-//	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-//	}
-//
-//	/**
-//	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-//	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
         JsonReader jsr = new JsonReader(request);
@@ -49,7 +38,7 @@ public class LoginController extends HttpServlet {
         	if(m.getString("password").equals(password)) {
         		JSONObject resp = new JSONObject();
                 Cookie login_email = new Cookie("email", email);
-                login_email.setMaxAge(7 * 24 * 60 * 60); // 一星期內有效
+                login_email.setMaxAge(60 * 60); // 一小時內有效
                 login_email.setPath("/");
                 response.addCookie(login_email);
                 
@@ -60,7 +49,7 @@ public class LoginController extends HttpServlet {
                 jsr.response(resp, response);
         	}else {
         		/** 以字串組出JSON格式之資料 */
-    			String resp = "{\"status\": \'400\', \"message\": \'登入失敗，密碼！\', \'response\': \'\'}";
+    			String resp = "{\"status\": \'400\', \"message\": \'登入失敗，密碼錯誤！\', \'response\': \'\'}";
     			/** 透過JsonReader物件回傳到前端（以字串方式） */
     			jsr.response(resp, response);
         	}
@@ -71,12 +60,4 @@ public class LoginController extends HttpServlet {
 			jsr.response(resp, response);
         }
 	}
-
-	/**
-	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
-	 */
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
 }

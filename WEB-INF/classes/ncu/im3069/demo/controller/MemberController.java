@@ -21,7 +21,7 @@ import ncu.im3069.tools.JsonReader;
  * @since 1.0.0
  */
 
-@WebServlet("/api/member.do")
+//@WebServlet("/api/member.do")
 public class MemberController extends HttpServlet {
     
     /** The Constant serialVersionUID. */

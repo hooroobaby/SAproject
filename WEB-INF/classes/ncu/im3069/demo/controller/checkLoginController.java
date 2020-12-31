@@ -13,7 +13,7 @@ import ncu.im3069.tools.JsonReader;
 /**
  * Servlet implementation class checkLoginController
  */
-@WebServlet("/api/checklogin.do")
+//@WebServlet("/api/checklogin.do")
 public class checkLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

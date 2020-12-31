@@ -15,7 +15,7 @@ import ncu.im3069.tools.JsonReader;
 
 import javax.servlet.annotation.WebServlet;
 
-@WebServlet("/api/order.do")
+//@WebServlet("/api/order.do")
 public class OrderController extends HttpServlet {
 
     /** The Constant serialVersionUID. */

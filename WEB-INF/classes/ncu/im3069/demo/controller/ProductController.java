@@ -9,7 +9,7 @@ import org.json.*;
 import ncu.im3069.demo.app.ProductHelper;
 import ncu.im3069.tools.JsonReader;
 
-@WebServlet("/api/product.do")
+//@WebServlet("/api/product.do")
 public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

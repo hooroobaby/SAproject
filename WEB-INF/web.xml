@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<web-app>
+    <servlet>
+        <servlet-name>member</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.MemberController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>member</servlet-name>
+        <url-pattern>/api/member.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>order</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.OrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>order</servlet-name>
+        <url-pattern>/api/order.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>product</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.ProductController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>product</servlet-name>
+        <url-pattern>/api/product.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>login</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.LoginController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/api/login.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>checklogin</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.checkLoginController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>checklogin</servlet-name>
+        <url-pattern>/api/checklogin.do</url-pattern>
+    </servlet-mapping>
+</web-app>

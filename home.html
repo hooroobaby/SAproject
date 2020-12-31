@@ -22,59 +22,66 @@
 	<body>
 		<!-- navbar驗證登入 -->
 		<script type="text/javascript">
-                $(document).ready(function() {
-                	checklogin();
-                	
-                    function checklogin() {
-                        var email = $.cookie('email');
-                        var navbar_left = '';
-                        var navbar_right = '';
-                        
-                        if(email === undefined){
-                        	// 將資料組成JSON格式
-                            email = "";	
-                        }
-                        var data_object = {
-                        	"email": email
-                        };
+				$(document).ready(function() {
+					checklogin();
+					
+						function checklogin() {
+								var email = $.cookie('email');
+								var navbar_left = '';
+								var navbar_right = '';
+								
+								if(email === undefined){
+									// 將資料組成JSON格式
+										email = "";	
+								}
+								var data_object = {
+									"email": email
+								};
 
-                        // 將JSON格式轉換成字串
-                        var data_string = JSON.stringify(data_object);
+								// 將JSON格式轉換成字串
+								var data_string = JSON.stringify(data_object);
 
-                        // 發出POST的AJAX請求
-                        $.ajax({
-                                type: "POST",
-                                url: "api/checklogin.do",
-                                data: data_string,
-                                crossDomain: true,
-                                cache: false,
-                                dataType: 'json',
-                                timeout: 5000,
-                                success: function (response) {
-                                	if(response.status == 400){
-                                    	navbar_right += '<ul class="navbar-nav">';
-                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
-                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
-                                    	navbar_right += '</ul>';
-                                    }else if(response.status == 200){
-                                    	navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
-                                    	navbar_right += '<ul class="navbar-nav">';
-                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
-                                    	navbar_right += '<i class="fas fa-address-book"></i> '+ response.response.name +'</a></li>';
-                                    	navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
-                                    	navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li></ul>';
-                                    }
-                                	
-                                	$("#navbar_left").append(navbar_left);
-                                	$("#navbar_right").append(navbar_right);
-                                },
-                                error: function () {
-                                    alert("無法連線到伺服器！");
-                                }
-                        });
-                    }
-                });
-            </script>
+								// 發出POST的AJAX請求
+								$.ajax({
+												type: "POST",
+												url: "api/checklogin.do",
+												data: data_string,
+												crossDomain: true,
+												cache: false,
+												dataType: 'json',
+												timeout: 5000,
+												success: function (response) {
+													navbar_left += '<li class="nav-item"><a class="nav-link" href="./home.html">Home</a></li>';
+													if(response.status == 400){
+															navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
+															navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
+														}else if(response.status == 200){
+															navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
+															navbar_left += '<li class="nav-item"><a class="nav-link" href="./receipt.html">Receipt</a></li>';
+															
+															navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
+															navbar_right += '<i class="fas fa-address-book"></i> '+ response.response.name +'</a></li>';
+															navbar_right += '<li class="nav-item"><a id="logout" class="nav-link" href="#">';
+															navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li>';
+														}
+													
+													$("#navbar_left").append(navbar_left);
+													$("#navbar_right").append(navbar_right);
+												},
+												error: function () {
+														alert("無法連線到伺服器！");
+												}
+								});
+						}
+				});
+				
+				$(document).ready(function(){
+					$(document).on("click", "#logout", function (){
+						$.removeCookie('email', {path:'/'});
+						document.location.href = "./home.html";
+					});
+				});
+		</script>
 		<!-- 上面資訊排 -->
 		<nav class="navbar navbar-expand-md navbar-light">
 	        <div class="container">
@@ -84,20 +91,11 @@
 	            </button>
 	        
 	            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	                <ul class="navbar-nav mr-auto">
-	                    <li class="nav-item">
-	                        <a class="nav-link" href="./home.html">Home</a>
-	                    </li>
-	                    <div id="navbar_left"></div>
-	                    <li class="nav-item">
-	                        <a class="nav-link" href="#">Contact</a>
-	                    </li>
-	                </ul>
-		            <div id="navbar_right"></div>
+	                <ul class="navbar-nav mr-auto" id="navbar_left"></ul>
+	                <ul class="navbar-nav" id="navbar_right"></ul>
 	            </div>
 	        </div>
     	</nav>
-
 <!-- header -->
 
 <!-- 下面資訊欄 -->
@@ -125,7 +123,7 @@
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
 			<div class="card">
-				<img src="./statics/img/book/go.jpg" class="card-img-top">
+				<img src=" 	" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">The Way To GO</h5>
 					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

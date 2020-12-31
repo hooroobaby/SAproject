@@ -123,7 +123,7 @@
 				</div>
 
 				<div class="form-group">
-					<input type="submit" value="Login" class="btn float-right btn-outline-success" id="submit">
+					<input type="button" value="Login" class="btn float-right btn-outline-success" id="submit">
 				</div>
 			</form>
 			
@@ -135,9 +135,14 @@
                         submit();
                     });
        				//按Enter等同點擊       
-                    $("#submit").keypress(function(e){
+                    $("#member_password").keypress(function(e){
                    		if (e.which == 13){
-                    		submit();
+                   			$form.click();
+                   		}	  
+                   	});
+                    $("#member_email").keypress(function(e){
+                   		if (e.which == 13){
+                   			$form.click();
                    		}	  
                    	});
 
@@ -168,7 +173,7 @@
                                     	$('#flashMessage').html(response.message);
                                         $('#flashMessage').show();
                                     }else if(response.status == 200){
-                                    	window.location = "./home.html";
+                                    	document.location.href = "./home.html";
                                     }
                                 },
                                 error: function () {
