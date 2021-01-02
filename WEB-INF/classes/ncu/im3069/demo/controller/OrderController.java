@@ -61,7 +61,7 @@ public class OrderController extends HttpServlet {
         else {
         	JSONObject query = oh.getByPeopleId(id);
             resp.put("status", "200");
-            resp.put("message", "單筆訂單資料取得成功");
+            resp.put("message", "所有訂單資料取得成功");
             resp.put("response", query);
         }
 

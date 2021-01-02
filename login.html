@@ -171,7 +171,7 @@
                                 success: function (response) {
                                     if(response.status == 400){
                                     	$('#flashMessage').html(response.message);
-                                        $('#flashMessage').show();
+                                      $('#flashMessage').show();
                                     }else if(response.status == 200){
                                     	document.location.href = "./home.html";
                                     }
