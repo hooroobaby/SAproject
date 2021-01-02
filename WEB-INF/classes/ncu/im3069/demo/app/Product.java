@@ -57,6 +57,15 @@ public class Product {
      * @param image 產品圖片
      * @param describe 產品敘述
      */
+	public Product(int id, String name, String image, String describe) {
+		this.id = id;
+		this.name = name;
+		this.rented = rented;
+		this.image = image;
+		this.describe = describe;
+		this.receiptID = receiptID;
+	}
+	
 	public Product(int id, String name, boolean rented, String image, String describe, int receiptID) {
 		this.id = id;
 		this.name = name;

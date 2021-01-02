@@ -113,13 +113,13 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-user"></i></span>
 					</div>
-					<input type="text" name="email" placeholder="email" class="form-control" id="member_email">
+					<input type="email" name="email" placeholder="email" class="form-control" id="member_email" required>
 				</div>
 				<div class="input-group form-group">
 					<div class="input-group-prepend">
 						<span class="input-group-text"><i class="fas fa-key"></i></span>
 					</div>
-					<input type="password" name="password" placeholder="password" class="form-control" id="member_password">
+					<input type="password" name="password" placeholder="password" class="form-control" id="member_password" required>
 				</div>
 
 				<div class="form-group">
@@ -128,61 +128,61 @@
 			</form>
 			
 			<script type="text/javascript">
-                $(document).ready(function() {
-                    // 處理表單點擊事件
-                    var $form = $('#submit');
-                    $form.click(function() {
-                        submit();
-                    });
-       				//按Enter等同點擊       
-                    $("#member_password").keypress(function(e){
-                   		if (e.which == 13){
-                   			$form.click();
-                   		}	  
-                   	});
-                    $("#member_email").keypress(function(e){
-                   		if (e.which == 13){
-                   			$form.click();
-                   		}	  
-                   	});
+				$(document).ready(function() {
+						// 處理表單點擊事件
+						var $form = $('#submit');
+						$form.click(function() {
+								submit();
+						});
+						//按Enter等同點擊       
+						$("#member_password").keypress(function(e){
+							if (e.which == 13){
+								$form.click();
+							}	  
+						});
+						$("#member_email").keypress(function(e){
+							if (e.which == 13){
+								$form.click();
+							}	  
+						});
 
-                    function submit() {
-                        var email = $('#member_email').val();
-                        var password = $('#member_password').val();
-                        
-                        // 將資料組成JSON格式
-                        var data_object = {
-                            "email": email,
-                            "password": password
-                    	};
+						function submit() {
+								var email = $('#member_email').val();
+								var password = $('#member_password').val();
+								
+								// 將資料組成JSON格式
+								var data_object = {
+										"email": email,
+										"password": password
+								};
 
-                        // 將JSON格式轉換成字串
-                        var data_string = JSON.stringify(data_object);
+								// 將JSON格式轉換成字串
+								var data_string = JSON.stringify(data_object);
 
-                        // 發出POST的AJAX請求
-                        $.ajax({
-                                type: "POST",
-                                url: "api/login.do",
-                                data: data_string,
-                                crossDomain: true,
-                                cache: false,
-                                dataType: 'json',
-                                timeout: 5000,
-                                success: function (response) {
-                                    if(response.status == 400){
-                                    	$('#flashMessage').html(response.message);
-                                      $('#flashMessage').show();
-                                    }else if(response.status == 200){
-                                    	document.location.href = "./home.html";
-                                    }
-                                },
-                                error: function () {
-                                    alert("無法連線到伺服器！");
-                                }
-                        });
-                    }
-                });
-            </script>
+								// 發出POST的AJAX請求
+								$.ajax({
+												type: "POST",
+												url: "api/login.do",
+												data: data_string,
+												crossDomain: true,
+												cache: false,
+												dataType: 'json',
+												timeout: 5000,
+												success: function (response) {
+														if(response.status == 400){
+															$('#flashMessage').html(response.message);
+															$('#flashMessage').show();
+														}else if(response.status == 200){
+															document.location.href = "./home.html";
+														}
+												},
+												error: function () {
+														alert("無法連線到伺服器！");
+												}
+								});
+						}
+				});
+		</script>
             
 		</div>
 		<div class="card-footer">

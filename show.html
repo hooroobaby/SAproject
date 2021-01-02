@@ -67,7 +67,8 @@
 
               $("#reserve").show();
               if(response.response.isManager){
-                $(".hidebutton").show();
+                $("#edit").show();
+                $("#del").show();
               }
             }
 
@@ -117,8 +118,8 @@
                     src="https://mbweb.b-cdn.net/images/nobooks-ic.png" style="width: 250px; height: 250px;" class="img-thumbnail">
                   <div class="mt-2">
                     <button id="reserve" class="btn btn-primary" style="display: none;">預訂</button>
-                    <a href="#" class="btn btn-warning hidebutton" style="display: none;">修改書籍資料</a>
-                    <a href="#" class="btn btn-danger hidebutton" style="display: none;">刪除書籍</a>
+                    <a id="edit" href="#" class="btn btn-warning" style="display: none;">修改書籍資料</a>
+                    <button id="del" class="btn btn-danger" style="display: none;">刪除書籍</button>
                   </div>
                 </div>
                 <div class="userData ml-3">
@@ -186,10 +187,12 @@
     var id = url.searchParams.get("id");
     var s = url.searchParams.get("s");
 
+    $('#edit').attr("href", "./edit.html?id=" + id + "&s=detail");
+
     //購物車資料變數
     var client_cart_obj = getCartDataFromClient();
 
-    //取得該書本詳細資料request
+    //========取得該書本詳細資料request========
     function getProduct() {
         $.ajax({
           type: "GET",
@@ -225,7 +228,7 @@
 
       getProduct();
 
-      //以下為預訂function
+      //=========以下為預訂function============
       function setButtonFunction() {
         $('#reserve').click(function () {
           addProductToCart(id);
@@ -272,6 +275,38 @@
           $('#reserve').html('預定');
         }
       }
+
+      //============以下為刪除function==========
+      // 將資料組成JSON格式
+      var data_object = {
+        "id" :id
+      };
+
+      // 將JSON格式轉換成字串
+      var data_string = JSON.stringify(data_object);
+
+      function deleteProduct() {
+        $.ajax({
+          type: "DELETE",
+          url: "api/product.do",
+          data: data_string,
+          crossDomain: true,
+          cache: false,
+          dataType: 'json',
+          timeout: 5000,
+          success: function (response) {
+            alert("成功刪除書本資訊");
+            document.location.href = "./home.html";
+          },
+          error: function () {
+            alert("無法連線到伺服器！");
+          }
+        });
+      }
+
+      $('#del').click(function () {
+        deleteProduct();
+      });
   </script>
 
 <!-- footer -->

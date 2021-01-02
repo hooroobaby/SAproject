@@ -59,3 +59,7 @@ footer.pt-5.pb-2 {
   color: rgb(98, 182, 164);
   text-decoration: none; /*  沒有底線 */
 }
+
+textarea.form-control {
+  height: 200px;
+}
