@@ -106,50 +106,46 @@
 	<header class="jumbotron">
 		<h1>Welcome To Library!</h1>
 		<div class="d-inline float-right">
-			<form action="#" method="GET" class="input-group mb-3">
-				<input type="text" name="search" placeholder="Enter Book's Name" class="form-control">
-				<div class="input-group-append"><button type="button" class="btn btn-success">Search</button></div>
+			<form accept-charset="utf-8" class="input-group mb-3">
+				<input type="text" id="search_text" placeholder="Enter Book's Name" name="s" class="form-control">
+				<div class="input-group-append"><input type="button" id="search" class="btn btn-success" value="Search"></div>
 			</form>
 		</div>
 	</header>
 
 	<div class="row">
 		<div class="col-lg-3 col-sm-6 mb-5">
-			<div class="card">
+			<div class="card home_book">
 				<img src="./statics/img/book/c.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">C語言教學手冊</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<button type="button" class="btn btn-outline-secondary">Share More!</button>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
-			<div class="card">
+			<div class="card home_book">
 				<img src=" ./statics/img/book/go.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">The Way To GO</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<a href="#" class="btn btn-outline-secondary">Share More!</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
-			<div class="card">
+			<div class="card home_book">
 				<img src="./statics/img/book/java.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">Java教科書</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<a href="#" class="btn btn-outline-secondary">Share More!</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-sm-6 mb-5">
-			<div class="card">
+			<div class="card home_book">
 				<img src="./statics/img/book/python.jpg" class="card-img-top">
 				<div class="card-body">
 					<h5 class="card-title">python教科書</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 					<a href="#" class="btn btn-outline-secondary">Share More!</a>
 				</div>
 			</div>
@@ -168,6 +164,50 @@
 			<li><a class="page-link" href="#">Last</a></li>
 		</ul>
 </nav>
+
+<script type="text/javascript">
+	//取得網址參數
+	var url_string = window.location.href;
+	var url = new URL(url_string);
+	var s = url.searchParams.get("s");
+
+	function searching() {
+		// 發出GET的AJAX請求
+		$.ajax({
+			type: "GET",
+			url: "api/product.do",
+			data: "s=" + s,
+			crossDomain: true,
+			cache: false,
+			dataType: 'json',
+			timeout: 5000,
+			success: function (response) {
+				console.log(response);
+			},
+			error: function () {
+				alert("無法連線到伺服器！");
+			}
+		});
+	}
+	searching();
+
+	// 點擊搜尋，轉址
+	var $form = $('#search');
+	$form.click(function () {
+		search();
+	});
+	//按Enter等同點擊       
+	$("#search_text").keypress(function (e) {
+		if (e.which == 13) {
+			$form.click();
+		}
+	});
+
+	function search(){
+		var search_text = $('#search_text').val();
+		document.location.href = "./home.html?s=" + search_text;
+	}
+</script>
 
 <!-- footer -->
 </div>

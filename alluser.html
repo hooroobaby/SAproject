@@ -58,17 +58,14 @@
           } else if (response.status == 200) {
             navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
             navbar_left += '<li class="nav-item"><a class="nav-link" href="./receipt.html">Receipt</a></li>';
+            if (response.response.isManager) {
+              navbar_left += '<li class="nav-item"><a class="nav-link" href="./manage.html">Manage</a></li>';
+            }
 
             navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
             navbar_right += '<i class="fas fa-address-book"></i> ' + response.response.name + '</a></li>';
             navbar_right += '<li class="nav-item"><a id="logout" class="nav-link" href="#">';
             navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li>';
-
-            $("#reserve").show();
-            if (response.response.isManager) {
-              $("#edit").show();
-              $("#del").show();
-            }
           }
 
           $("#navbar_left").append(navbar_left);
@@ -104,9 +101,9 @@
   </nav>
 
   <div class="wraper">
-  <!-- header -->
+    <!-- header -->
   <div class="container mt-5">
-    <div id="flashMessage" class="message" style="display: none;"></div>
+    <div id="flashMessage-success" class="message" style="display: none;"></div>
 
     <div class="mt-5">
       <h2>會員清單</h2>
@@ -144,8 +141,8 @@
           timeout: 5000,
           success: function (response) {
             if (response.status == 200) {
-              $("#flashMessage").html("成功! 已經成功刪除會員");
-              $("#flashMessage").show();
+              $("#flashMessage-success").html("成功! 已經成功刪除會員");
+              $("#flashMessage-success").show();
               getAllMember();
             }
             console.log(response);

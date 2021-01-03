@@ -23,64 +23,65 @@
 <body>
   <!-- navbar驗證登入 -->
   <script type="text/javascript">
-    $(document).ready(function () {
-      checklogin();
+    checklogin();
 
-      function checklogin() {
-        var email = $.cookie('email');
-        var navbar_left = '';
-        var navbar_right = '';
+    function checklogin() {
+      var email = $.cookie('email');
+      var navbar_left = '';
+      var navbar_right = '';
 
-        if (email === undefined) {
-          // 將資料組成JSON格式
-          email = "";
-        }
-        var data_object = {
-          "email": email
-        };
+      if (email === undefined) {
+        // 將資料組成JSON格式
+        email = "";
+      }
+      var data_object = {
+        "email": email
+      };
 
-        // 將JSON格式轉換成字串
-        var data_string = JSON.stringify(data_object);
+      // 將JSON格式轉換成字串
+      var data_string = JSON.stringify(data_object);
 
-        // 發出POST的AJAX請求
-        $.ajax({
-          type: "POST",
-          url: "api/checklogin.do",
-          data: data_string,
-          crossDomain: true,
-          cache: false,
-          dataType: 'json',
-          timeout: 5000,
-          success: function (response) {
-            navbar_left += '<li class="nav-item"><a class="nav-link" href="./home.html">Home</a></li>';
-            if (response.status == 400) {
-              navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
-              navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
-            } else if (response.status == 200) {
-              navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
-              navbar_left += '<li class="nav-item"><a class="nav-link" href="./receipt.html">Receipt</a></li>';
-
-              navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
-              navbar_right += '<i class="fas fa-address-book"></i> ' + response.response.name + '</a></li>';
-              navbar_right += '<li class="nav-item"><a id="logout" class="nav-link" href="#">';
-              navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li>';
-
-              $("#reserve").show();
-              if(response.response.isManager){
-                $("#edit").show();
-                $("#del").show();
-              }
+      // 發出POST的AJAX請求
+      $.ajax({
+        type: "POST",
+        url: "api/checklogin.do",
+        data: data_string,
+        crossDomain: true,
+        cache: false,
+        dataType: 'json',
+        timeout: 5000,
+        success: function (response) {
+          navbar_left += '<li class="nav-item"><a class="nav-link" href="./home.html">Home</a></li>';
+          if (response.status == 400) {
+            navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
+            navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
+          } else if (response.status == 200) {
+            navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
+            navbar_left += '<li class="nav-item"><a class="nav-link" href="./receipt.html">Receipt</a></li>';
+            if (response.response.isManager) {
+              navbar_left += '<li class="nav-item"><a class="nav-link" href="./manage.html">Manage</a></li>';
             }
 
-            $("#navbar_left").append(navbar_left);
-            $("#navbar_right").append(navbar_right);
-          },
-          error: function () {
-            alert("無法連線到伺服器！");
+            navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
+            navbar_right += '<i class="fas fa-address-book"></i> ' + response.response.name + '</a></li>';
+            navbar_right += '<li class="nav-item"><a id="logout" class="nav-link" href="#">';
+            navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li>';
+
+            $("#reserve").show();
+            if (response.response.isManager) {
+              $("#edit").show();
+              $("#del").show();
+            }
           }
-        });
-      }
-    });
+
+          $("#navbar_left").append(navbar_left);
+          $("#navbar_right").append(navbar_right);
+        },
+        error: function () {
+          alert("無法連線到伺服器！");
+        }
+      });
+    }
 
     $(document).ready(function () {
       $(document).on("click", "#logout", function () {
@@ -104,7 +105,9 @@
       </div>
     </div>
   </nav>
-  <!-- header -->
+
+  <div class="wraper">
+    <!-- header -->
 
   <div class="container mt-5 mb-5">
     <div class="row">
@@ -115,8 +118,8 @@
               <div class="d-flex justify-content-start">
                 <div class="image-container">
                   <img id="img"
-                    src="https://mbweb.b-cdn.net/images/nobooks-ic.png" style="width: 250px; height: 250px;" class="img-thumbnail">
-                  <div class="mt-2">
+                    src="https://mbweb.b-cdn.net/images/nobooks-ic.png" style="width: 250px; height: 250px; display: block;" class="img-thumbnail">
+                  <div class="mt-2" style="display: inline-block;">
                     <button id="reserve" class="btn btn-primary" style="display: none;">預訂</button>
                     <a id="edit" href="#" class="btn btn-warning" style="display: none;">修改書籍資料</a>
                     <button id="del" class="btn btn-danger" style="display: none;">刪除書籍</button>
@@ -278,7 +281,7 @@
 
       //============以下為刪除function==========
       function deleteProduct() {
-        var check = window.confirm("確認刪除會員？");
+        var check = window.confirm("確認刪除書本？");
         if (check == true) {
           console.log("You pressed OK!");
           var request = { 'id': id };

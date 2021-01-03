@@ -101,9 +101,9 @@
   </nav>
 
   <div class="wraper">
-<!-- header -->
+    <!-- header -->
 <div class="container mt-5">
-  <div id="flashMessage" class="message" style="display: none;"></div>
+  <div id="flashMessage-success" class="message" style="display: none;"></div>
 
   <div class="mt-5">
     <h2>所有訂單列表</h2>
@@ -141,8 +141,8 @@
         timeout: 5000,
         success: function (response) {
           if (response.status == 200) {
-            $("#flashMessage").html("成功! 已經成功刪除訂單");
-            $("#flashMessage").show();
+            $("#flashMessage-success").html("成功! 已經成功刪除訂單");
+            $("#flashMessage-success").show();
             getAllReceipt();
           }
           console.log(response);

@@ -81,3 +81,17 @@ textarea.form-control {
   border-width: 2px 5px;
   border-style: solid;
 }
+
+#flashMessage-success {
+  margin: auto;
+  text-align: center;
+  width: 40%;
+  height: 35px;
+  line-height: 35px;
+  color: #3c763d;
+  border-radius: 10px;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  border-width: 2px 5px;
+  border-style: solid;
+}
