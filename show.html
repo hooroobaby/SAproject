@@ -106,7 +106,7 @@
   </nav>
   <!-- header -->
 
-  <div class="container mt-5">
+  <div class="container mt-5 mb-5">
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -277,31 +277,32 @@
       }
 
       //============以下為刪除function==========
-      // 將資料組成JSON格式
-      var data_object = {
-        "id" :id
-      };
-
-      // 將JSON格式轉換成字串
-      var data_string = JSON.stringify(data_object);
-
       function deleteProduct() {
-        $.ajax({
-          type: "DELETE",
-          url: "api/product.do",
-          data: data_string,
-          crossDomain: true,
-          cache: false,
-          dataType: 'json',
-          timeout: 5000,
-          success: function (response) {
-            alert("成功刪除書本資訊");
-            document.location.href = "./home.html";
-          },
-          error: function () {
-            alert("無法連線到伺服器！");
-          }
-        });
+        var check = window.confirm("確認刪除會員？");
+        if (check == true) {
+          console.log("You pressed OK!");
+          var request = { 'id': id };
+          var data_string = JSON.stringify(request);
+          $.ajax({
+            type: "DELETE",
+            url: "api/product.do",
+            data: data_string,
+            crossDomain: true,
+            cache: false,
+            dataType: 'json',
+            timeout: 5000,
+            success: function (response) {
+              alert("成功刪除書本資訊");
+              document.location.href = "./home.html";
+            },
+            error: function () {
+              alert("無法連線到伺服器！");
+            }
+          });
+        }
+        else {
+          console.log("You pressed Cancel!");
+        }
       }
 
       $('#del').click(function () {

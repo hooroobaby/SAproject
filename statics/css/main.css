@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  height: 100%;
   background: linear-gradient(rgb(248, 248, 248), rgba(255, 255, 255, 0.3));
   background: url(https://images.unsplash.com/photo-1415369629372-26f2fe60c467?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1868&q=80);
   background-size: cover;
@@ -27,10 +28,6 @@ h1 {
 hr {
   background-color: white;
   width: 100%;
-}
-
-.position {
-  margin-top: 7%;
 }
 
 .jumbotron {
@@ -62,4 +59,25 @@ footer.pt-5.pb-2 {
 
 textarea.form-control {
   height: 200px;
+}
+
+.wraper {
+  /* 設定高度最小為100%, 如果內容區塊很多, 可以長大 */
+  min-height: 100%;
+  /* 位置設為relative, 作為footer區塊位置的參考 */
+  position: relative;
+}
+
+#flashMessage {
+  margin: auto;
+  text-align: center;
+  width: 40%;
+  height: 35px;
+  line-height: 35px;
+  color: #a94442;
+  border-radius: 10px;
+  background-color: #f2dede;
+  border-color: #deb7be;
+  border-width: 2px 5px;
+  border-style: solid;
 }

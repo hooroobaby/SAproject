@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="icon">
+  <link href="statics/icon/favicon.ico" type="image/x-icon" rel="shortcut icon">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="./statics/css/main.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Raleway:wght@600&display=swap"
+    rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="./statics/js/jquery.cookie.js"></script>
+
+  <title>木木馬華圖書館</title>
+</head>
+
+<body>
+  <!-- navbar驗證登入 -->
+  <script type="text/javascript">
+    $(document).ready(function () {
+      checklogin();
+
+      function checklogin() {
+        var email = $.cookie('email');
+        var navbar_left = '';
+        var navbar_right = '';
+
+        if (email === undefined) {
+          // 將資料組成JSON格式
+          email = "";
+        }
+        var data_object = {
+          "email": email
+        };
+
+        // 將JSON格式轉換成字串
+        var data_string = JSON.stringify(data_object);
+
+        // 發出POST的AJAX請求
+        $.ajax({
+          type: "POST",
+          url: "api/checklogin.do",
+          data: data_string,
+          crossDomain: true,
+          cache: false,
+          dataType: 'json',
+          timeout: 5000,
+          success: function (response) {
+            navbar_left += '<li class="nav-item"><a class="nav-link" href="./home.html">Home</a></li>';
+            if (response.status == 400) {
+              navbar_right += '<li class="nav-item"><a class="nav-link" href="./register.html"><i class="fas fa-address-card"></i> sign up</a></li>';
+              navbar_right += '<li class="nav-item"><a class="nav-link" href="./login.html"><i class="fas fa-address-book"></i> login</a></li>';
+            } else if (response.status == 200) {
+              navbar_left += '<li class="nav-item"><a class="nav-link" href="./cart.html">Cart</a></li>';
+              navbar_left += '<li class="nav-item"><a class="nav-link" href="./receipt.html">Receipt</a></li>';
+
+              navbar_right += '<li class="nav-item"><a class="nav-link" href="#">';
+              navbar_right += '<i class="fas fa-address-book"></i> ' + response.response.name + '</a></li>';
+              navbar_right += '<li class="nav-item"><a id="logout" class="nav-link" href="#">';
+              navbar_right += '<i class="fas fa-address-book"></i> Logout</a></li>';
+            }
+
+            $("#navbar_left").append(navbar_left);
+            $("#navbar_right").append(navbar_right);
+          },
+          error: function () {
+            alert("無法連線到伺服器！");
+          }
+        });
+      }
+    });
+
+    $(document).ready(function () {
+      $(document).on("click", "#logout", function () {
+        $.removeCookie('email', { path: '/' });
+        document.location.href = "./home.html";
+      });
+    });
+  </script>
+  <!-- 上面資訊排 -->
+  <nav class="navbar navbar-expand-md navbar-light">
+    <div class="container">
+      <a href="#" class="navbar-brand"><i class="fas fa-cat"></i> 木木馬華圖書館</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" id="navbar_left"></ul>
+        <ul class="navbar-nav" id="navbar_right"></ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wraper">
+    <!-- header -->
+  <div class="container mt-5">
+    <a href="./new.html" type="button" class="btn btn-outline-primary">新增書本</a>
+    <a href="./alluser.html" type="button" class="btn btn-outline-success">管理使用者</a>
+    <a href="./allreceipt.html" type="button" class="btn btn-outline-info">管理訂單</a>
+  </div>
+  <!-- footer -->
+  </div>
+  <div id="footer_partials"></div>
+  <script>$('#footer_partials').load('partials/footer.html')</script>

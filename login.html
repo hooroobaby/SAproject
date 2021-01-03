@@ -98,104 +98,108 @@
 	        </div>
     	</nav>
 
+<div class="wraper">
 <!-- header -->
 
-<div id="flashMessage" class="message" style="display: none;"></div>
-
-<div class="d-flex justify-content-center position">
-	<div class="card" style="width:30%">
-		<div class="card-header">
-			<h3>Sign In</h3>
-		</div>
-		<div class="card-body">
-			<form accept-charset="utf-8">
-				<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-user"></i></span>
-					</div>
-					<input type="email" name="email" placeholder="email" class="form-control" id="member_email" required>
-				</div>
-				<div class="input-group form-group">
-					<div class="input-group-prepend">
-						<span class="input-group-text"><i class="fas fa-key"></i></span>
-					</div>
-					<input type="password" name="password" placeholder="password" class="form-control" id="member_password" required>
-				</div>
-
-				<div class="form-group">
-					<input type="button" value="Login" class="btn float-right btn-outline-success" id="submit">
-				</div>
-			</form>
-			
-			<script type="text/javascript">
-				$(document).ready(function() {
-						// 處理表單點擊事件
-						var $form = $('#submit');
-						$form.click(function() {
-								submit();
-						});
-						//按Enter等同點擊       
-						$("#member_password").keypress(function(e){
-							if (e.which == 13){
-								$form.click();
-							}	  
-						});
-						$("#member_email").keypress(function(e){
-							if (e.which == 13){
-								$form.click();
-							}	  
-						});
-
-						function submit() {
-								var email = $('#member_email').val();
-								var password = $('#member_password').val();
-								
-								// 將資料組成JSON格式
-								var data_object = {
-										"email": email,
-										"password": password
-								};
-
-								// 將JSON格式轉換成字串
-								var data_string = JSON.stringify(data_object);
-
-								// 發出POST的AJAX請求
-								$.ajax({
-												type: "POST",
-												url: "api/login.do",
-												data: data_string,
-												crossDomain: true,
-												cache: false,
-												dataType: 'json',
-												timeout: 5000,
-												success: function (response) {
-														if(response.status == 400){
-															$('#flashMessage').html(response.message);
-															$('#flashMessage').show();
-														}else if(response.status == 200){
-															document.location.href = "./home.html";
-														}
-												},
-												error: function () {
-														alert("無法連線到伺服器！");
-												}
-								});
-						}
-				});
-		</script>
-            
-		</div>
-		<div class="card-footer">
-			<div class="d-flex justify-content-center">
-				Don't have an account?-<a href="#">Sign Up</a>
+<div class="container mt-5">
+	<div id="flashMessage" class="message" style="display: none;"></div>
+	
+	<div class="d-flex justify-content-center mt-5">
+		<div class="card" style="width:30%">
+			<div class="card-header">
+				<h3>Sign In</h3>
 			</div>
-			<div class="d-flex justify-content-center">
-				<a href="#">Forgot your password?</a>
+			<div class="card-body">
+				<form accept-charset="utf-8">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="email" name="email" placeholder="email" class="form-control" id="member_email" required>
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" name="password" placeholder="password" class="form-control" id="member_password"
+							required>
+					</div>
+	
+					<div class="form-group">
+						<input type="button" value="Login" class="btn float-right btn-outline-success" id="submit">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center">
+					Don't have an account?-<a href="#">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<script type="text/javascript">
+	$(document).ready(function () {
+		// 處理表單點擊事件
+		var $form = $('#submit');
+		$form.click(function () {
+			submit();
+		});
+		//按Enter等同點擊       
+		$("#member_password").keypress(function (e) {
+			if (e.which == 13) {
+				$form.click();
+			}
+		});
+		$("#member_email").keypress(function (e) {
+			if (e.which == 13) {
+				$form.click();
+			}
+		});
+
+		function submit() {
+			var email = $('#member_email').val();
+			var password = $('#member_password').val();
+
+			// 將資料組成JSON格式
+			var data_object = {
+				"email": email,
+				"password": password
+			};
+
+			// 將JSON格式轉換成字串
+			var data_string = JSON.stringify(data_object);
+
+			// 發出POST的AJAX請求
+			$.ajax({
+				type: "POST",
+				url: "api/login.do",
+				data: data_string,
+				crossDomain: true,
+				cache: false,
+				dataType: 'json',
+				timeout: 5000,
+				success: function (response) {
+					if (response.status == 400) {
+						$('#flashMessage').html(response.message);
+						$('#flashMessage').show();
+					} else if (response.status == 200) {
+						document.location.href = "./home.html";
+					}
+				},
+				error: function () {
+					alert("無法連線到伺服器！");
+				}
+			});
+		}
+	});
+</script>
+
 <!--  footer  -->
+</div>
 <div id="footer_partials"></div>
 <script>$('#footer_partials').load('partials/footer.html')</script>
